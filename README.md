@@ -27,16 +27,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | string | null: false |
+| Column             | Type   | Options     | Options      |
+| ------------------ | ------ | ----------- | ------------ |
+| nickname           | string | null: false |              |
+| email              | string | null: false | unique: true |
+| encrypted_password | string | null: false |              |
+| last_name          | string | null: false |              |
+| first_name         | string | null: false |              |
+| last_name_kana     | string | null: false |              |
+| first_name_kana    | string | null: false |              |
+| birthday           | date    | null: false |              |
 
 ### Association
 
@@ -52,7 +52,7 @@ Things you may want to cover:
 | price             | integer    | null: false |                   |
 | item_condition_id | integer    | null: false |                   |
 | shipping_fee_id   | integer    | null: false |                   |
-| shipping_area_id  | integer    | null: false |                   |
+| prefecture_id     | integer    | null: false |                   |
 | days_to_ship_id   | integer    | null: false |                   |
 | category_id       | integer    | null: false |                   |
 | user              | references | null: false | foreign_key: true |
@@ -74,14 +74,14 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :item
-- has_many :addresses
+- has_one :address
 
 ## addresses テーブル
 
 | Column        | Type       | Options     |
 | ------------- | ---------- | ----------- |
 | postcode      | string     | null: false |
-| prefecture_id | string     | null: false |
+| prefecture_id | integer    | null: false |
 | city          | string     | null: false |
 | block         | string     | null: false |
 | building      | string     | null: false |
