@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    items.create(memo: params[:memo])
+  
   end
 
   def move_to_index
