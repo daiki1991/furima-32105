@@ -47,13 +47,13 @@ require 'rails_helper'
       @user.password = "aaaaa"
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include  "Password パスワードには英字と数字の両方を含めて設定してください"
+      expect(@user.errors.full_messages).to include  "Password パスワードには半角の英字と数字の両方を含めて設定してください"
      end
      it "passwordは、数字だけでは登録できない" do
       @user.password = "00000"
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include  "Password パスワードには英字と数字の両方を含めて設定してください"
+      expect(@user.errors.full_messages).to include  "Password パスワードには半角の英字と数字の両方を含めて設定してください"
      end
      it "passwordとpassword_confirmationが一致しないと登録できない" do
         @user.password_confirmation = ""
@@ -79,6 +79,32 @@ require 'rails_helper'
          @user.first_name_kana = "aa"
          @user.valid?
          expect(@user.errors.full_messages).to include("First name kana 全角カタカナを使用してください")
+     end
+     it "passwordは、全角では登録できない" do
+         @user.password = "aa"
+         @user.password_confirmation = @user.password
+         @user.valid?
+         expect(@user.errors.full_messages).to include("Password パスワードには半角の英字と数字の両方を含めて設定してください")
+     end
+     it "名字が空では登録できない" do
+         @user.last_name = ""
+         @user.valid?
+         expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
+     it "名前が空では登録できない" do
+         @user.first_name = ""
+         @user.valid?
+         expect(@user.errors.full_messages).to include("First name can't be blank")
+     end
+     it "名字のフリガナが空では登録できない" do
+         @user.last_name_kana = ""
+         @user.valid?
+         expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+     end
+     it "名前のフリガナが空では登録できない" do
+         @user.first_name_kana = ""
+         @user.valid?
+         expect(@user.errors.full_messages).to include("First name kana can't be blank")
      end
    end
 end
