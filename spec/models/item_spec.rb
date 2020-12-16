@@ -54,9 +54,31 @@ RSpec.describe Item, type: :model do
     end
 
     it "画像が空では登録できない" do
-      @item.image = []
-      expect(@item.errors.full_messages).to include 
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Image can't be blank"
+    end
+
+    it "価格は半角数字での入力でないと登録できない" do
+      @item.price = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Price is invalid"
+    end
+
+    it "価格は299円以下は登録できない" do
+      @item.price = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Price 価格は、300円〜9,999,999円の間で入力してください"
+    end
+
+    it "価格は10000000円以上は登録できない" do
+      @item.price = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Price 価格は、300円〜9,999,999円の間で入力してください"
 
     end
+
+
+
   end
 end

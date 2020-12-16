@@ -21,11 +21,14 @@ end
   
   validates :text, presence: true
   validates :item_name, presence: true 
-  validates :price, presence: true 
   validates :image, presence: true
 
   def was_attached?
     self.image.attached?
   end
+
+  validates :price, format: { with: /\A[0-9]+\z/, messsage: "価格は半角数字のみ入力できます"}
+  validates :price, inclusion: { in: 300..9999999, message: "価格は、300円〜9,999,999円の間で入力してください"}
+  validates :price, presence: true
 end
 
