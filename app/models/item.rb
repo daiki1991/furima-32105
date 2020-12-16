@@ -11,7 +11,7 @@ class Item < ApplicationRecord
     belongs_to_active_hash :ShippingFee
     belongs_to_active_hash :DaysToShip 
 
-  with_options numericality: {other_than: 1} do
+  with_options numericality: {other_than: 1, message: "値が1の時は、登録できない"} do
     validates :item_condition_id, presence: true 
     validates :shipping_fee_id, presence: true 
     validates :prefecture_id, presence: true 
@@ -19,6 +19,8 @@ class Item < ApplicationRecord
     validates :category_id, presence: true
   end
   with_options presence: true do
+    validates :price, inclusion: { in: 300..9999999, message: "価格は、300円〜9,999,999円の間で入力してください"}
+    validates :price, format: { with: /\[0-9]/, message: '価格は、半角数字で入力してください'}
     validates :text
     validates :item_name 
     validates :image
@@ -28,9 +30,7 @@ class Item < ApplicationRecord
       self.image.attached?
     end
 
-  with_options presence: true do
-    validates :price, format: { with: /\A[0-9]+\z/, message: "価格は半角数字のみ入力できます"}
-    validates :price, inclusion: { in: 300..9999999, message: "価格は、300円〜9,999,999円の間で入力してください"}
-  end
+  
+    
 end
 
