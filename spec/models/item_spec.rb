@@ -53,11 +53,24 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Image can't be blank"
     end
 
-    it "価格は半角数字での入力でないと登録できない" do
+    it "価格は半角英語だけでは登録できない" do
       @item.price = "abc"
       @item.valid?
       expect(@item.errors.full_messages).to include "Price 価格は、半角数字で入力してください"
     end
+
+    it "価格は全角文字だけでは登録できない" do
+      @item.price = "３００"
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Price 価格は、半角数字で入力してください"
+    end
+
+    it "価格は半角英数混合では登録できない" do
+      @item.price = "a300"
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Price 価格は、半角数字で入力してください"
+    end
+
 
     it "価格は299円以下は登録できない" do
       @item.price = "299"
