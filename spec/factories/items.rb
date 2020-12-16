@@ -8,7 +8,6 @@ FactoryBot.define do
     days_to_ship_id       {2}
     category_id           {2}         
     text                  {"商品です"}   
-    image                 {""}
     user
     
     after(:build) do |item|
