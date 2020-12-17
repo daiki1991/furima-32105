@@ -19,7 +19,7 @@
         <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= @item.ShippingFee.name %>
+        <%= @item.shipping_fee.name %>
       </span>
     </div>
 
@@ -53,11 +53,11 @@
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @item.ItemCondition.name %></td>
+          <td class="detail-value"><%= @item.item_condition.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.ShippingFee.name %></td>
+          <td class="detail-value"><%= @item.shipping_fee.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
@@ -65,7 +65,7 @@
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%=  @item.DaysToShip.name%></td>
+          <td class="detail-value"><%=  @item.days_to_ship.name%></td>
         </tr>
       </tbody>
     </table>
