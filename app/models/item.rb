@@ -20,10 +20,7 @@ class Item < ApplicationRecord
   end
   with_options presence: true do
     validates :price, inclusion: { in: 300..9999999, message: "価格は、300円〜9,999,999円の間で入力してください"}
-<<<<<<< Updated upstream
-=======
     validates :price, format: { with: /\A[0-9]+\z/, message: '価格は、半角数字で入力してください'}
->>>>>>> Stashed changes
     validates :text
     validates :item_name 
     validates :image
