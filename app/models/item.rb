@@ -7,9 +7,9 @@ class Item < ApplicationRecord
 
     belongs_to :prefecture 
     belongs_to :category
-    belongs_to :ItemCondition
-    belongs_to :ShippingFee
-    belongs_to :DaysToShip 
+    belongs_to :item_condition
+    belongs_to :shipping_fee
+    belongs_to :days_to_ship
 
   with_options numericality: {other_than: 1, message: "値が1の時は、登録できない"} do
     validates :item_condition_id, presence: true 
