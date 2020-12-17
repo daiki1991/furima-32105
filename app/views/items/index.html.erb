@@ -127,44 +127,42 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-      <li class='list'>
-        <%= link_to "#" do %>
         <% @items.each do |item| %>
-        <div class='item-img-content'>
-          <%= image_tag item.image, class: "item-img" %>
+          <li class='list'>
+          <%= link_to "#" do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
+            </div>
 
-          <%# 商品が売れていればsold outを表示しましょう %>
-          <%#div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-          <%# //商品が売れていればsold outを表示しましょう %>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.item_name %>
+              </h3>
+            </div>
 
-        </div>
-        <div class='item-info'>
-          <h3 class='item-name'>
-            <%= item.item_name %>
-          </h3>
-          <div class='item-price'>
-            <span><%= item.price %>円<br>
+            <div class='item-price'>
+              <span><%= item.price %>円<br>
               <% case item.shipping_fee_id %>
                 <% when 2 %>
-                着払い(購入者負担)
+                  着払い(購入者負担)
                 <% when 3 %>
-                送料込み(出品者負担)
-              <% end %>
-            </span>
-            <div class='star-btn'>
-              <%= image_tag "star.png", class:"star-icon" %>
-              <span class='star-count'>0</span>
+                  送料込み(出品者負担)
+                <% end %>
+              </span>
+
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'>0</span>
+              </div>
+              
             </div>
-          </div>
-        </div>
-        <% end %>
+          <% end %>
         <% end %>
       </li>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       
-      <% if  @items = nil %>
+    
+      <% if  @items.empty? %>
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
