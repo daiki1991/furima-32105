@@ -5,11 +5,11 @@ class Item < ApplicationRecord
     has_one_attached :image
 
 
-    belongs_to_active_hash :prefecture 
-    belongs_to_active_hash :category
-    belongs_to_active_hash :ItemCondition
-    belongs_to_active_hash :ShippingFee
-    belongs_to_active_hash :DaysToShip 
+    belongs_to :prefecture 
+    belongs_to :category
+    belongs_to :ItemCondition
+    belongs_to :ShippingFee
+    belongs_to :DaysToShip 
 
   with_options numericality: {other_than: 1, message: "値が1の時は、登録できない"} do
     validates :item_condition_id, presence: true 
@@ -20,6 +20,10 @@ class Item < ApplicationRecord
   end
   with_options presence: true do
     validates :price, inclusion: { in: 300..9999999, message: "価格は、300円〜9,999,999円の間で入力してください"}
+<<<<<<< Updated upstream
+=======
+    validates :price, format: { with: /\A[0-9]+\z/, message: '価格は、半角数字で入力してください'}
+>>>>>>> Stashed changes
     validates :text
     validates :item_name 
     validates :image
