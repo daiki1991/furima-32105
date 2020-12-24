@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).order("created_at DESC")
   end
-
+    
   def new
     @item = Item.new
   end
@@ -24,7 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @item.user_id
+    if @item.purchase != nil
+      redirect_to root_path
+    elsif current_user.id != @item.user_id
       redirect_to root_path
     end
   end
