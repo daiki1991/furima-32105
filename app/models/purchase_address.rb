@@ -7,8 +7,10 @@ class PurchaseAddress
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :block
-    validates :phone_number
+    validates :phone_number, format: {with:  /\A\d{11}\z/, message: "is only 11 digits number"}
     validates :token
+    validates :user_id
+    validates :item_id
   end
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
