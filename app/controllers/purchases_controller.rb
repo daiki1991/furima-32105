@@ -3,7 +3,7 @@ class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    if @item.purchase != nil or current_user.id == @item.user_id 
+    if @item.purchase != nil || current_user.id == @item.user_id 
       redirect_to root_path
     end
     @purchase_address = PurchaseAddress.new
